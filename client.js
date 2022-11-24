@@ -1,7 +1,7 @@
 var net = require('net');
  
 function getConnection(connName){
-  var client = net.connect({port: 33300, host:'localhost'}, function() {
+  var client = net.connect({port: 33300, host:'192.168.219.200'}, function() {
     console.log(connName + ' 연결 됨.');
     //console.log(`로컬 : ${this.localAddress} / ${this.localPort}`);
     //console.log(`리모트 : ${this.remoteAddress} / ${this.remotePort}`);
@@ -31,7 +31,7 @@ function getConnection(connName){
     client.reconnect = interval =>{
         setTimeout(() => {
             console.log('서버와 재연결 중');
-            client.connect(33300, 'op.plandlabs.com')
+            client.connect(33300, '192.168.219.200')
         }, interval)
     }
   });
@@ -54,12 +54,20 @@ var moveRobotTime = function(){
 	
 	//var Elves = getConnection("Elves");
 	//var Hobbits = getConnection("Hobbits");
-	let data = [35,3,3,1,0,3,52,182,0,3,57,130,0,0,0,2,0,0,0,1,0,0,7,210,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35];
+	//let data = [35,3,3,1,0,3,52,182,0,3,57,130,0,0,0,2,0,0,0,1,0,0,7,210,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35];
+  let data = "음오아예";
+  let jsonArr = {
+    a1 : "123"
+    ,a2 : "456"
+    ,a3 : "789"
+    ,a4 : "101112"
+  };
 	//console.log(Buffer.from(data));
 	//console.log(typeof Buffer.from(data));
 	//console.log(JSON.stringify(data));
-	//socket.emit('data', Buffer.from(data));
-	writeData(robo3, Buffer.from(data));
+	//writeData('data', Buffer.from(jsonArr));
+	writeData(robo3, Buffer.from(JSON.stringify(jsonArr)));
+  //writeData(robo3, data);
 	//writeData(Elves, "More Arrows");
 	//writeData(Hobbits, "More Pipe Weed");	
 }
