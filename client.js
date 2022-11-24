@@ -60,7 +60,7 @@ var moveRobotTime = function(){
     a1 : "123"
     ,a2 : "456"
     ,a3 : "789"
-    ,a4 : "101112"
+    ,a4 : new Date().toISOString()
   };
 	//console.log(Buffer.from(data));
 	//console.log(typeof Buffer.from(data));
