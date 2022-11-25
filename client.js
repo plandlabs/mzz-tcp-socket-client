@@ -2,10 +2,14 @@ const net = require('net');
 const express = require('express');
 const app = express();
 require('date-util');
-
+import EventEmitter from 'events';
 let hostPort = 33300;
 let hostIP = '192.168.219.200';
 var clientUser;
+
+class Emitter extends EventEmitter { }
+const emitter = new Emitter();
+emitter.setMaxListeners(15);
 
 function getConnection(connName){
   var client = net.connect({port: hostPort, host: hostIP}, function() {
@@ -82,7 +86,8 @@ var moveRobotTime = function(){
 
 app.get('/', (req, res) =>{
   clientUser = getConnection("robo3");
-  moveRobotTime();
+  //moveRobotTime();
+  setInterval(moveRobotTime, 1000 * 1);
   res.send('client open!');
   console.log("client open!");
 });
